@@ -43,7 +43,8 @@ jobs:
     steps:
       - run:
           name: "Run Acceptance Test << parameters.test_number >>"
-          command: echo "Running acceptance test #<< parameters.test_number >>..."
+          command: |
+            echo "Running acceptance test #<< parameters.test_number >>"
 
   deploy_production:
     docker:
