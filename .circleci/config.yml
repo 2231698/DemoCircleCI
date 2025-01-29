@@ -2,7 +2,6 @@ version: 2.1
 
 jobs:
   checkout_and_unit_test:
-    description: Checkout code and run unit tests
     docker:
       - image: circleci/python:3.8
     steps:
@@ -12,7 +11,6 @@ jobs:
           command: echo "Running unit tests..."
 
   deploy_backend:
-    description: Deploy backend
     docker:
       - image: circleci/python:3.8
     steps:
@@ -21,7 +19,6 @@ jobs:
           command: echo "Deploying backend..."
 
   integration_tests_backend:
-    description: Run integration tests
     docker:
       - image: circleci/python:3.8
     steps:
@@ -30,30 +27,30 @@ jobs:
           command: echo "Running integration tests..."
 
   deploy_staging:
-    description: Deploy to staging environment
     docker:
       - image: circleci/python:3.8
     steps:
       - run:
-          name: "Deploy to Staging"
+          name: "Deploy Staging"
           command: echo "Deploying to staging..."
 
   acceptance_tests:
-    description: Run acceptance tests
+    parameters:
+      test_number:
+        type: integer
     docker:
       - image: circleci/python:3.8
     steps:
       - run:
-          name: "Run Acceptance Tests"
-          command: echo "Running acceptance tests..."
+          name: "Run Acceptance Test << parameters.test_number >>"
+          command: echo "Running acceptance test #<< parameters.test_number >>..."
 
   deploy_production:
-    description: Deploy to production
     docker:
       - image: circleci/python:3.8
     steps:
       - run:
-          name: "Deploy to Production"
+          name: "Deploy Production"
           command: echo "Deploying to production..."
 
 workflows:
